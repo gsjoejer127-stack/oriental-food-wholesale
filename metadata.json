@@ -1,0 +1,6 @@
+{
+  "name": "东升食品 Oriental Food Wholesale",
+  "description": "B2B & B2C Oriental Food Wholesale e-commerce platform with responsive catalog, shopping cart, tier pricing and checkout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
