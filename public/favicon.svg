@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f2541b"/>
+      <stop offset="55%" stop-color="#f7a70a"/>
+      <stop offset="100%" stop-color="#fbc02d"/>
+    </linearGradient>
+    <clipPath id="circleClip">
+      <circle cx="100" cy="100" r="96"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#circleClip)">
+    <rect x="0" y="0" width="200" height="118" fill="url(#sky)"/>
+    <rect x="0" y="118" width="200" height="20" fill="#2b7fd4"/>
+    <rect x="0" y="138" width="200" height="62" fill="#1f9d55"/>
+    <g stroke="#ffe9b0" stroke-width="6" stroke-linecap="round">
+      <line x1="100" y1="100" x2="100" y2="34"/>
+      <line x1="100" y1="100" x2="60" y2="42"/>
+      <line x1="100" y1="100" x2="140" y2="42"/>
+      <line x1="100" y1="100" x2="30" y2="66"/>
+      <line x1="100" y1="100" x2="170" y2="66"/>
+      <line x1="100" y1="100" x2="20" y2="100"/>
+      <line x1="100" y1="100" x2="180" y2="100"/>
+      <line x1="100" y1="100" x2="30" y2="134"/>
+      <line x1="100" y1="100" x2="170" y2="134"/>
+    </g>
+    <circle cx="100" cy="100" r="38" fill="#ffffff"/>
+  </g>
+  <circle cx="100" cy="100" r="96" fill="none" stroke="#ffffff" stroke-width="6"/>
+</svg>
