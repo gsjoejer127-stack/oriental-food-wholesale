@@ -235,7 +235,7 @@ export const PRODUCTS: Product[] = [
     cert: 'HALAL',
     pricing: {
       unitLabel: '500g*pkt',
-      cartonPrice: 620.0,
+      unitPrice: 30.0,
       cartonLabel: '500g*10pkt*ctn',
       cartonPrice: 300.0,
       cartonRatio: 10,
