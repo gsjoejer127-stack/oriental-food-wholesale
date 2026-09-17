@@ -175,9 +175,9 @@ export const OrderHistoryModal: React.FC<OrderHistoryModalProps> = ({
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                        {lang === 'zh' ? '已支付' : lang === 'ms' ? 'Dibayar' : 'Paid'}
+                      <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border flex items-center gap-1 ${ord.paymentStatus === 'paid' ? 'text-emerald-700 bg-emerald-50 border-emerald-200' : 'text-amber-700 bg-amber-50 border-amber-200'}`}>
+                        <CheckCircle2 className="w-3 h-3" />
+                        {ord.paymentStatus === 'paid' ? (lang === 'zh' ? '已支付' : lang === 'ms' ? 'Dibayar' : 'Paid') : (lang === 'zh' ? '待确认付款' : lang === 'ms' ? 'Menunggu Bayaran' : 'Pending Payment')}
                       </span>
                     </div>
                   </div>
