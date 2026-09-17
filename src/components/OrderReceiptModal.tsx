@@ -30,7 +30,7 @@ export const OrderReceiptModal: React.FC<OrderReceiptModalProps> = ({
       )
       .join('%0A');
 
-    const text = `*东升食品 - 批发新订单订单号: ${order.id}*%0A%0A*客户资料:*%0A姓名: ${order.customer.fullName}%0A电话: ${order.customer.phone}%0A公司/餐厅: ${order.customer.companyName || '个人/无'}%0A配送地址: ${order.customer.address}, ${order.customer.city}%0A配送日期: ${order.customer.deliveryDate}%0A%0A*订购食材清单:*%0A${itemsList}%0A%0A*食材小计:* RM ${order.subtotal.toFixed(2)}%0A*冷链运费:* RM ${order.deliveryFee.toFixed(2)}%0A*订单总额:* RM ${order.total.toFixed(2)}%0A*支付状态:* 已完成支付 (${order.customer.paymentMethod.toUpperCase()})`;
+    const text = `*东升食品 - 批发新订单订单号: ${order.id}*%0A%0A*客户资料:*%0A姓名: ${order.customer.fullName}%0A电话: ${order.customer.phone}%0A公司/餐厅: ${order.customer.companyName || '个人/无'}%0A配送地址: ${order.customer.address}, ${order.customer.city}%0A配送日期: ${order.customer.deliveryDate}%0A%0A*订购食材清单:*%0A${itemsList}%0A%0A*食材小计:* RM ${order.subtotal.toFixed(2)}%0A*冷链运费:* RM ${order.deliveryFee.toFixed(2)}%0A*订单总额:* RM ${order.total.toFixed(2)}%0A*支付状态:* ${order.paymentStatus === 'paid' ? '已完成支付' : '待确认付款 (尚未收款)'} - 拟用方式: ${order.customer.paymentMethod.toUpperCase()})`;
 
     return `https://wa.me/60108822608?text=${text}`;
   };
@@ -47,7 +47,7 @@ export const OrderReceiptModal: React.FC<OrderReceiptModalProps> = ({
             <CheckCircle2 className="w-8 h-8" />
           </div>
           <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-200">
-            {lang === 'zh' ? '订单支付成功 · 批发展示发票' : lang === 'ms' ? 'PESANAN DIBAYAR · INVOIS JUALAN' : 'ORDER PAID · SALES INVOICE'}
+            {order.paymentStatus === 'paid' ? (lang === 'zh' ? '订单支付成功 · 批发展示发票' : lang === 'ms' ? 'PESANAN DIBAYAR · INVOIS JUALAN' : 'ORDER PAID · SALES INVOICE') : (lang === 'zh' ? '订单已提交 · 待确认付款' : lang === 'ms' ? 'PESANAN DIHANTAR · MENUNGGU BAYARAN' : 'ORDER SUBMITTED · PENDING PAYMENT')}
           </span>
           <h2 className="text-xl sm:text-2xl font-bold text-stone-900 mt-2 font-serif">
             {lang === 'zh' ? '感谢您的惠顾！订单已接单' : lang === 'ms' ? 'Terima Kasih! Pesanan Diterima' : 'Thank You For Your Business!'}
