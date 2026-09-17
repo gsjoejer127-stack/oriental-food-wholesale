@@ -100,7 +100,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         deliveryFee,
         discount: 0,
         total: grandTotal,
-        paymentStatus: 'paid',
+        paymentStatus: 'pending',
       };
       onOrderComplete(newOrder);
     }, 1800);
@@ -540,8 +540,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <Lock className="w-4 h-4" />
                 <span>
                   {lang === 'zh'
-                    ? `确认支付 RM ${grandTotal.toFixed(2)} 并提交订单`
-                    : `Confirm Payment & Order (RM ${grandTotal.toFixed(2)})`}
+                    ? `提交订单 (RM ${grandTotal.toFixed(2)})`
+                    : `Submit Order (RM ${grandTotal.toFixed(2)})`}
                 </span>
               </button>
             </div>
@@ -552,10 +552,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             <div className="py-16 text-center space-y-4">
               <div className="w-16 h-16 rounded-full border-4 border-amber-600 border-t-transparent animate-spin mx-auto" />
               <h3 className="text-lg font-bold text-stone-900">
-                {lang === 'zh' ? '正在处理集成支付通道...' : 'Processing Payment Gateway...'}
+                {lang === 'zh' ? '正在提交订单...' : 'Submitting Order...'}
               </h3>
               <p className="text-xs text-stone-500">
-                {lang === 'zh' ? '正在向银行/支付平台发起授权并校验信息' : 'Authorizing order details securely...'}
+                {lang === 'zh' ? '正在为您登记订单信息，稍后客服会联系您确认付款' : 'Recording your order details, our team will contact you to confirm payment.'}
               </p>
             </div>
           )}
