@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { 
   X, 
-  QrCode, 
-  Building2, 
   CheckCircle2, 
   Truck, 
   MapPin, 
@@ -52,11 +50,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     deliveryZone: defaultZone,
     deliveryDate: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0], // 2 days from now
     notes: '',
-    paymentMethod: 'fpx',
+    paymentMethod: 'whatsapp',
   });
 
   const [pdpaConsent, setPdpaConsent] = useState<boolean>(false);
-  const [selectedBank, setSelectedBank] = useState<string>('maybank');
   const [receiptFile, setReceiptFile] = useState<string | null>(null);
   const [tngTimer, setTngTimer] = useState<number>(300); // 5 mins
 
@@ -368,7 +365,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             <div className="space-y-6">
               <div>
                 <h3 className="text-sm font-bold text-stone-900 mb-3 flex items-center justify-between">
-                  <span>{lang === 'zh' ? '选择支付集成方式' : lang === 'ms' ? 'Pilih Kaedah Pembayaran' : 'Select Payment Integration'}</span>
+                  <span>{lang === 'zh' ? '付款方式' : lang === 'ms' ? 'Kaedah Pembayaran' : 'Payment'}</span>
                   <button
                     onClick={() => setStep('info')}
                     className="text-xs text-amber-700 hover:underline"
@@ -377,114 +374,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   </button>
                 </h3>
 
-                <div className="grid grid-cols-3 gap-2 mb-6">
-                  <button
-                    type="button"
-                    onClick={() => handleInputChange('paymentMethod', 'fpx')}
-                    className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center transition-all ${
-                      formData.paymentMethod === 'fpx'
-                        ? 'border-amber-600 bg-amber-50 text-amber-950 font-bold shadow-sm'
-                        : 'border-stone-200 bg-stone-50 text-stone-600'
-                    }`}
-                  >
-                    <Building2 className="w-5 h-5 text-amber-700 mb-1" />
-                    <span className="text-xs">FPX 网银 / Banking</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInputChange('paymentMethod', 'tng')}
-                    className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center transition-all ${
-                      formData.paymentMethod === 'tng'
-                        ? 'border-sky-600 bg-sky-50 text-sky-950 font-bold shadow-sm'
-                        : 'border-stone-200 bg-stone-50 text-stone-600'
-                    }`}
-                  >
-                    <QrCode className="w-5 h-5 text-sky-600 mb-1" />
-                    <span className="text-xs">Touch 'n Go</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInputChange('paymentMethod', 'bank_transfer')}
-                    className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center transition-all ${
-                      formData.paymentMethod === 'bank_transfer'
-                        ? 'border-emerald-600 bg-emerald-50 text-emerald-950 font-bold shadow-sm'
-                        : 'border-stone-200 bg-stone-50 text-stone-600'
-                    }`}
-                  >
-                    <ShieldCheck className="w-5 h-5 text-emerald-600 mb-1" />
-                    <span className="text-xs">{lang === 'zh' ? '对公银行转账' : lang === 'ms' ? 'Pindahan Bank Syarikat' : 'Bank Transfer'}</span>
-                  </button>
+                <div className="bg-emerald-50/80 p-4 rounded-2xl border border-emerald-200 text-xs text-emerald-950">
+                  {lang === 'zh'
+                    ? '提交订单后，请通过 WhatsApp 联系我们确认付款方式与金额。'
+                    : lang === 'ms'
+                    ? 'Selepas menghantar pesanan, sila hubungi kami melalui WhatsApp untuk mengesahkan kaedah dan jumlah pembayaran.'
+                    : 'After submitting your order, please contact us on WhatsApp to confirm payment.'}
+                  <div className="mt-1.5 font-mono font-bold text-emerald-900">WhatsApp 010-882 2608</div>
                 </div>
-
-                {/* Sub-Panel: FPX Online Banking */}
-                {formData.paymentMethod === 'fpx' && (
-                  <div className="bg-stone-50 p-4 rounded-2xl border border-stone-200 space-y-3">
-                    <p className="text-xs font-semibold text-stone-700">
-                      {lang === 'zh' ? '选择您的 FPX 网上银行:' : 'Select your FPX Bank:'}
-                    </p>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {[
-                        { id: 'maybank', name: 'Maybank2u' },
-                        { id: 'cimb', name: 'CIMB Clicks' },
-                        { id: 'pbe', name: 'Public Bank' },
-                        { id: 'rhb', name: 'RHB Now' },
-                        { id: 'hlb', name: 'Hong Leong Bank' },
-                        { id: 'bank_islam', name: 'Bank Islam' },
-                      ].map((bank) => (
-                        <button
-                          key={bank.id}
-                          onClick={() => setSelectedBank(bank.id)}
-                          className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
-                            selectedBank === bank.id
-                              ? 'border-amber-600 bg-white text-amber-900 shadow-sm'
-                              : 'border-stone-200 bg-white/70 text-stone-700 hover:bg-white'
-                          }`}
-                        >
-                          {bank.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Sub-Panel: Touch 'n Go eWallet */}
-                {formData.paymentMethod === 'tng' && (
-                  <div className="bg-sky-50/80 p-5 rounded-2xl border border-sky-200 text-center space-y-3">
-                    <span className="bg-sky-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
-                      Touch 'n Go eWallet Instant Pay
-                    </span>
-                    <div className="w-36 h-36 mx-auto bg-white p-2 rounded-2xl shadow-md border border-sky-200 flex flex-col items-center justify-center relative">
-                      <QrCode className="w-28 h-28 text-sky-900" />
-                      <div className="absolute inset-0 bg-sky-900/5 backdrop-blur-[1px] rounded-2xl flex items-center justify-center" />
-                    </div>
-                    <p className="text-xs text-sky-950 font-mono font-bold">
-                      RM {grandTotal.toFixed(2)}
-                    </p>
-                    <p className="text-[11px] text-sky-800">
-                      {lang === 'zh' ? '请使用 Touch \'n Go App 扫描上方二维码进行支付' : 'Scan QR code with your Touch \'n Go eWallet app.'}
-                    </p>
-                  </div>
-                )}
-
-                {/* Sub-Panel: Direct Bank Transfer */}
-                {formData.paymentMethod === 'bank_transfer' && (
-                  <div className="bg-emerald-50/80 p-4 rounded-2xl border border-emerald-200 text-xs text-emerald-950 space-y-2">
-                    <div className="font-bold text-sm text-emerald-900">
-                      公司对公银行账户 (Maybank Account)
-                    </div>
-                    <div className="bg-white p-3 rounded-xl border border-emerald-200 font-mono space-y-1">
-                      <div><span className="text-stone-500">公司:</span> ORIENTAL FOOD WHOLESALE SDN BHD</div>
-                      <div><span className="text-stone-500">银行:</span> Maybank Berhad</div>
-                      <div><span className="text-stone-500">账号:</span> 5140 1234 8888</div>
-                      <div><span className="text-stone-500">转账金额:</span> <span className="font-bold text-emerald-700">RM {grandTotal.toFixed(2)}</span></div>
-                    </div>
-                    <p className="text-[11px] text-emerald-800 italic">
-                      * 转账后系统将自动为您生成电子发票，您也可以将水单上传或发送至客服 WhatsApp 010-882 2608 (工作时间: 周一至周五 10:00 AM - 6:00 PM)。
-                    </p>
-                  </div>
-                )}
               </div>
 
               {/* Order Summary Box */}
@@ -527,7 +424,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 {lang === 'zh' ? '正在提交订单...' : 'Submitting Order...'}
               </h3>
               <p className="text-xs text-stone-500">
-                {lang === 'zh' ? '正在为您登记订单信息，稍后客服会联系您确认付款' : 'Recording your order details, our team will contact you to confirm payment.'}
+                {lang === 'zh' ? '正在为您登记订单信息...' : lang === 'ms' ? 'Merekod butiran pesanan anda...' : 'Recording your order details...'}
               </p>
             </div>
           )}

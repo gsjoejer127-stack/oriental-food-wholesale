@@ -51,7 +51,7 @@ export interface CartItem {
 
 export type DeliveryZone = 'klang_valley' | 'outstation' | 'self_pickup';
 
-export type PaymentMethod = 'fpx' | 'tng' | 'card' | 'bank_transfer';
+export type PaymentMethod = 'whatsapp' | 'fpx' | 'tng' | 'card' | 'bank_transfer';
 
 export interface CheckoutFormData {
   fullName: string;
