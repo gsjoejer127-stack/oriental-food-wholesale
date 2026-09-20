@@ -267,6 +267,7 @@ export default function App() {
         onOpenCart={() => setCartDrawerOpen(true)}
         onOpenOEM={scrollToOEM}
         onOpenOrderHistory={() => setOrderHistoryModalOpen(true)}
+        onOpenPolicy={() => openPolicy('terms')}
         onOpenHalalStatement={() => setHalalStatementModalOpen(true)}
         orderHistoryCount={orderHistory.length}
       />
