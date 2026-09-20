@@ -16,6 +16,8 @@ import {
 } from 'lucide-react';
 import { CATEGORIES } from '../data/products';
 import { CartItem, Language } from '../types';
+import { PolicyLinks } from './PolicyLinks';
+import type { PolicyTab } from './DisclaimerModal';
 
 interface NavbarProps {
   activeCategory: string;
@@ -28,7 +30,7 @@ interface NavbarProps {
   onOpenCart: () => void;
   onOpenOEM: () => void;
   onOpenOrderHistory?: () => void;
-  onOpenPolicy?: () => void;
+  onOpenPolicy?: (tab: PolicyTab) => void;
   onOpenHalalStatement?: () => void;
   orderHistoryCount?: number;
 }
@@ -58,25 +60,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Top Banner Notice */}
       <div className="bg-stone-900 text-stone-200 text-xs py-1.5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-          <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
-            <span className="bg-amber-500 text-stone-950 font-bold px-1.5 py-0.5 rounded text-[10px] tracking-wide uppercase">
-              冷链配送
-            </span>
-            <span className="text-stone-300 min-w-0 truncate">
-              {lang === 'zh'
-                ? '巴生谷 Klang Valley 满 RM500 免运费 | 外坡 Outstation 满 RM800 免运费'
-                : lang === 'ms'
-                ? 'Penghantaran Percuma: Lembah Klang (Min RM500) | Luar Kawasan (Min RM800)'
-                : 'Free Delivery: Klang Valley (Min RM500) | Outstation (Min RM800)'}
-            </span>
-            {onOpenPolicy && (
-              <button
-                onClick={onOpenPolicy}
-                className="shrink-0 text-amber-400 hover:text-amber-300 underline underline-offset-2 font-semibold cursor-pointer"
-              >
-                T&C Apply
-              </button>
-            )}
+          <div className="flex flex-col gap-0.5 min-w-0">
+            <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
+              <span className="bg-amber-500 text-stone-950 font-bold px-1.5 py-0.5 rounded text-[10px] tracking-wide uppercase">
+                冷链配送
+              </span>
+              <span className="text-stone-300 min-w-0 truncate">
+                {lang === 'zh'
+                  ? '巴生谷 Klang Valley 满 RM500 免运费 | 外坡 Outstation 满 RM800 免运费'
+                  : lang === 'ms'
+                  ? 'Penghantaran Percuma: Lembah Klang (Min RM500) | Luar Kawasan (Min RM800)'
+                  : 'Free Delivery: Klang Valley (Min RM500) | Outstation (Min RM800)'}
+              </span>
+            </div>
+            <PolicyLinks
+              onOpen={onOpenPolicy}
+              layout="row"
+              className="text-[10px]"
+              linkClassName="text-amber-400 hover:text-amber-300 font-semibold"
+            />
           </div>
           <div className="flex items-center gap-3 sm:gap-4 text-stone-400 text-[11px] shrink-0">
             <a href="tel:0108822608" className="flex items-center gap-1 hover:text-amber-400 transition-colors">

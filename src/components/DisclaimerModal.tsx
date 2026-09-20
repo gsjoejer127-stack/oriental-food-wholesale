@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   ShieldAlert,
   X,
@@ -53,22 +53,19 @@ export const DisclaimerModal: React.FC<DisclaimerModalProps> = ({
   lang,
   initialTab,
 }) => {
-  const [activeTab, setActiveTab] = useState<PolicyTab>('returns');
-
-  useEffect(() => {
-    if (isOpen) setActiveTab(initialTab ?? 'returns');
-  }, [isOpen, initialTab]);
+  const activeTab: PolicyTab = initialTab ?? 'returns';
 
   if (!isOpen) return null;
 
   const t = (zh: string, en: string, ms: string) => (lang === 'zh' ? zh : lang === 'ms' ? ms : en);
   const icon = 'w-4 h-4 text-amber-700';
 
-  const tabs: { id: PolicyTab; label: string }[] = [
-    { id: 'returns', label: t('1. 退换货政策', '1. Refund and Return Policy', '1. Polisi Bayaran Balik & Pemulangan') },
-    { id: 'terms', label: t('2. 条款与细则', '2. Terms and Conditions Policy', '2. Terma & Syarat') },
-    { id: 'pdpa', label: t('3. 个人资料保护 (PDPA)', '3. PDPA', '3. PDPA') },
-  ];
+  const names: Record<PolicyTab, { en: string; zh: string; ms: string }> = {
+    returns: { en: 'Refund and Return Policy', zh: '退换货政策', ms: 'Polisi Bayaran Balik & Pemulangan' },
+    terms: { en: 'Terms and Conditions Policy', zh: '条款与细则', ms: 'Terma & Syarat' },
+    pdpa: { en: 'PDPA', zh: '个人资料保护', ms: 'Perlindungan Data Peribadi' },
+  };
+  const policyName = names[activeTab];
 
   return (
     <div
@@ -87,7 +84,8 @@ export const DisclaimerModal: React.FC<DisclaimerModalProps> = ({
             </div>
             <div>
               <h2 className="text-lg sm:text-xl font-bold text-stone-900 font-serif">
-                {t('东升食品 · 政策与条款', 'Oriental Food · Policies & Terms', 'Oriental Food · Polisi & Terma')}
+                {policyName.en}
+                {lang !== 'en' && <span className="text-stone-500 font-normal"> · {lang === 'zh' ? policyName.zh : policyName.ms}</span>}
               </h2>
               <p className="text-xs text-stone-500 font-mono">ORIENTAL FOOD WHOLESALE SDN. BHD. ( 1653595-A )</p>
             </div>
@@ -101,25 +99,8 @@ export const DisclaimerModal: React.FC<DisclaimerModalProps> = ({
           </button>
         </div>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-2 pt-4 pb-2 border-b border-stone-100 text-xs font-semibold">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-3 py-1.5 rounded-xl transition-all ${
-                activeTab === tab.id
-                  ? 'bg-amber-700 text-white shadow-xs'
-                  : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
         {/* Content */}
-        <div className="py-5 space-y-4 text-xs sm:text-sm text-stone-600 leading-relaxed overflow-y-auto max-h-[60vh] pr-1">
+        <div className="py-5 space-y-4 text-xs sm:text-sm text-stone-600 leading-relaxed overflow-y-auto max-h-[60vh] pr-1 border-t border-stone-100 mt-4">
           {/* ───────────── TERMS & CONDITIONS ───────────── */}
           {activeTab === 'terms' && (
             <div className="space-y-4 animate-fadeIn">

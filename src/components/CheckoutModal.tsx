@@ -14,6 +14,8 @@ import {
   Upload,
   Sparkles
 } from 'lucide-react';
+import { POLICY_LINKS } from './PolicyLinks';
+import type { PolicyTab } from './DisclaimerModal';
 import { CartItem, CheckoutFormData, DeliveryZone, Language, Order, PaymentMethod } from '../types';
 
 interface CheckoutModalProps {
@@ -23,7 +25,7 @@ interface CheckoutModalProps {
   defaultZone: DeliveryZone;
   lang: Language;
   onOrderComplete: (order: Order) => void;
-  onOpenPolicy?: () => void;
+  onOpenPolicy?: (tab: PolicyTab) => void;
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({
@@ -338,14 +340,19 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         : lang === 'ms'
                         ? 'Saya telah membaca dan bersetuju dengan'
                         : 'I have read and agree to the'}{' '}
-                      <button
-                        type="button"
-                        onClick={onOpenPolicy}
-                        className="text-amber-700 underline font-semibold"
-                      >
-                        T&C Apply
-                      </button>
-                      {lang === 'zh' ? '（含 PDPA 与退换货政策）。' : lang === 'ms' ? ' (termasuk PDPA dan polisi pemulangan).' : ' (including PDPA and the refund & return policy).'}
+                      {POLICY_LINKS.map((l, i) => (
+                        <React.Fragment key={l.id}>
+                          {i > 0 && (i === POLICY_LINKS.length - 1 ? (lang === 'zh' ? ' 及 ' : lang === 'ms' ? ' dan ' : ' and ') : ', ')}
+                          <button
+                            type="button"
+                            onClick={() => onOpenPolicy?.(l.id)}
+                            className="text-amber-700 underline font-semibold"
+                          >
+                            {l.label}
+                          </button>
+                        </React.Fragment>
+                      ))}
+                      .
                     </span>
                   </label>
                 </div>

@@ -2,15 +2,17 @@ import React from 'react';
 import { MapPin, Phone, Mail, Truck, ChevronRight } from 'lucide-react';
 
 import { Language } from '../types';
+import { PolicyLinks } from './PolicyLinks';
+import type { PolicyTab } from './DisclaimerModal';
 
 interface FooterProps {
   lang: Language;
   onCategorySelect: (catId: string) => void;
-  onOpenDisclaimer?: () => void;
+  onOpenPolicy?: (tab: PolicyTab) => void;
   onOpenHalalStatement?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ lang, onCategorySelect, onOpenDisclaimer, onOpenHalalStatement }) => {
+export const Footer: React.FC<FooterProps> = ({ lang, onCategorySelect, onOpenPolicy, onOpenHalalStatement }) => {
   return (
     <footer className="bg-stone-950 text-stone-300 pt-12 pb-8 border-t border-stone-800 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -83,17 +85,13 @@ export const Footer: React.FC<FooterProps> = ({ lang, onCategorySelect, onOpenDi
                 <Truck className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
                 <span>外坡 Outstation: 满 <strong className="text-stone-200">RM800</strong> 免费配送</span>
               </li>
-              {onOpenDisclaimer && (
-                <li className="pl-5">
-                  <button
-                    onClick={onOpenDisclaimer}
-                    className="text-amber-400 hover:text-amber-300 underline underline-offset-2 font-semibold cursor-pointer"
-                  >
-                    T&C Apply
-                  </button>
-                </li>
-              )}
             </ul>
+            <PolicyLinks
+              onOpen={onOpenPolicy}
+              layout="list"
+              className="pt-1 text-[11px]"
+              linkClassName="text-amber-400 hover:text-amber-300 font-semibold"
+            />
           </div>
 
           {/* Quick Categories Jump */}
@@ -130,16 +128,13 @@ export const Footer: React.FC<FooterProps> = ({ lang, onCategorySelect, onOpenDi
           </div>
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-stone-500">
+        <div className="pt-6 flex flex-col gap-3 text-[11px] text-stone-500 pr-24 sm:pr-0">
           <div>© {new Date().getFullYear()} 东升食品 ORIENTAL FOOD WHOLESALE SDN. BHD. ( 1653595-A ). All Rights Reserved.</div>
-          {onOpenDisclaimer && (
-            <button
-              onClick={onOpenDisclaimer}
-              className="text-stone-400 hover:text-amber-300 underline underline-offset-2 font-semibold cursor-pointer"
-            >
-              T&C Apply
-            </button>
-          )}
+          <PolicyLinks
+            onOpen={onOpenPolicy}
+            layout="row"
+            linkClassName="text-stone-300 hover:text-amber-300 font-semibold"
+          />
         </div>
       </div>
     </footer>

@@ -267,7 +267,7 @@ export default function App() {
         onOpenCart={() => setCartDrawerOpen(true)}
         onOpenOEM={scrollToOEM}
         onOpenOrderHistory={() => setOrderHistoryModalOpen(true)}
-        onOpenPolicy={() => openPolicy('returns')}
+        onOpenPolicy={openPolicy}
         onOpenHalalStatement={() => setHalalStatementModalOpen(true)}
         orderHistoryCount={orderHistory.length}
       />
@@ -383,13 +383,13 @@ export default function App() {
       </main>
 
       {/* B2B OEM & Supply Chain Inquiry Section */}
-      <OEMInquirySection lang={lang} onOpenPolicy={() => openPolicy('pdpa')} />
+      <OEMInquirySection lang={lang} onOpenPolicy={openPolicy} />
 
       {/* Footer */}
       <Footer 
         lang={lang} 
         onCategorySelect={setActiveCategory} 
-        onOpenDisclaimer={() => openPolicy('returns')}
+        onOpenPolicy={openPolicy}
         onOpenHalalStatement={() => setHalalStatementModalOpen(true)}
       />
 
@@ -421,7 +421,7 @@ export default function App() {
         defaultZone={checkoutZone}
         lang={lang}
         onOrderComplete={handleOrderComplete}
-        onOpenPolicy={() => openPolicy('pdpa')}
+        onOpenPolicy={openPolicy}
       />
 
       <OrderReceiptModal
