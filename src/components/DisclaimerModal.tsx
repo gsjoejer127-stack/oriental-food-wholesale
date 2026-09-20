@@ -25,8 +25,6 @@ interface DisclaimerModalProps {
   onOpenHalalStatement?: () => void;
 }
 
-const LAST_UPDATED = '20 September 2026';
-
 const Section: React.FC<{ icon: React.ReactNode; title: string; children: React.ReactNode }> = ({
   icon,
   title,
@@ -342,135 +340,18 @@ export const DisclaimerModal: React.FC<DisclaimerModalProps> = ({
             </div>
           )}
 
-          {/* ───────────── PDPA / PRIVACY ───────────── */}
+          {/* ───────────── PDPA ───────────── */}
           {activeTab === 'pdpa' && (
             <div className="space-y-4 animate-fadeIn">
-              <div className="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-emerald-950 text-xs sm:text-sm">
-                    {t(
-                      '个人资料保护通知 (PDPA 2010)',
-                      'Personal Data Protection Notice (PDPA 2010)',
-                      'Notis Perlindungan Data Peribadi (PDPA 2010)',
-                    )}
-                  </h4>
-                  <p className="text-xs text-emerald-900 mt-1 leading-relaxed">
-                    {t(
-                      '本通知依据马来西亚《2010 年个人资料保护法令》（及其修正案）发出。购买时，您需同意将您提供的所有资料分享给我们，供我们进行内部跟进、记录及营销策略之用。',
-                      'This notice is issued under Malaysia\'s Personal Data Protection Act 2010 (as amended). When you purchase, you must agree to share all the information you provide with us for our internal follow-up, record-keeping and marketing strategy.',
-                      'Notis ini dikeluarkan di bawah Akta Perlindungan Data Peribadi 2010 Malaysia (seperti dipinda). Semasa membuat pembelian, anda mesti bersetuju berkongsi semua maklumat yang anda berikan kepada kami untuk susulan dalaman, simpanan rekod dan strategi pemasaran kami.',
-                    )}
-                  </p>
-                </div>
-              </div>
-
-              <Section icon={<FileText className={icon} />} title={t('1. 我们是谁', '1. Who we are', '1. Siapa kami')}>
-                <p>
+              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('个人资料 (PDPA)', 'Personal Data (PDPA)', 'Data Peribadi (PDPA)')}>
+                <p className="text-sm text-stone-700">
                   {t(
-                    '个人资料的使用者：ORIENTAL FOOD WHOLESALE SDN. BHD.（1653595-A），Kuala Lumpur, Malaysia。',
-                    'Data user: ORIENTAL FOOD WHOLESALE SDN. BHD. (1653595-A), Kuala Lumpur, Malaysia.',
-                    'Pengguna data: ORIENTAL FOOD WHOLESALE SDN. BHD. (1653595-A), Kuala Lumpur, Malaysia.',
+                    '购买时，您同意将您提供的所有资料分享给东升食品，供我们进行后期的内部跟进、记录及营销策略之用。',
+                    'By purchasing, you agree to share all the information you provide with Oriental Food for our internal follow-up, record-keeping and marketing strategy.',
+                    'Dengan membuat pembelian, anda bersetuju berkongsi semua maklumat yang anda berikan dengan Oriental Food untuk susulan dalaman, simpanan rekod dan strategi pemasaran kami.',
                   )}
                 </p>
               </Section>
-
-              <Section icon={<FileText className={icon} />} title={t('2. 我们收集哪些资料', '2. Personal data we collect', '2. Data peribadi yang kami kumpul')}>
-                <p>
-                  {t(
-                    '姓名、联系电话 / WhatsApp、电邮、公司名称、送货地址、送货日期、订单内容与备注，以及您所选的付款方式。',
-                    'Your name, phone / WhatsApp number, email, company name, delivery address, delivery date, order details and remarks, and the payment method you select.',
-                    'Nama, nombor telefon / WhatsApp, e-mel, nama syarikat, alamat penghantaran, tarikh penghantaran, butiran pesanan dan catatan, serta kaedah pembayaran yang anda pilih.',
-                  )}
-                </p>
-                <p>
-                  {t(
-                    '姓名、电话及送货地址为处理订单所必需；若不提供，我们可能无法处理您的订单。其余项目为选填。',
-                    'Name, phone number and delivery address are needed to process your order; without them we may be unable to process it. Other fields are optional.',
-                    'Nama, nombor telefon dan alamat penghantaran diperlukan untuk memproses pesanan anda; tanpanya kami mungkin tidak dapat memproses pesanan. Medan lain adalah pilihan.',
-                  )}
-                </p>
-              </Section>
-
-              <Section icon={<Check className="w-4 h-4 text-emerald-600" />} title={t('3. 使用目的（内部跟进、记录、营销策略）', '3. Purposes (internal follow-up, records, marketing strategy)', '3. Tujuan (susulan dalaman, rekod, strategi pemasaran)')}>
-                <Bullets
-                  items={[
-                    t('处理、确认与配送您的订单，开具发票与收款；', 'Processing, confirming and delivering your order, invoicing and collecting payment;', 'Memproses, mengesahkan dan menghantar pesanan anda, mengeluarkan invois dan mengutip bayaran;'),
-                    t('下单后的内部跟进：确认收货、售后与品质问题处理、客户服务、意见回访；', 'Internal follow-up after you order: confirming receipt, after-sales and quality claims, customer service and feedback;', 'Susulan dalaman selepas anda membuat pesanan: pengesahan penerimaan, khidmat lepas jualan dan tuntutan kualiti, khidmat pelanggan dan maklum balas;'),
-                    t('内部记录：保存客户、订单与购买记录，用于对账、客户管理与日后查询；', 'Internal records: keeping customer, order and purchase records for reconciliation, account management and future reference;', 'Rekod dalaman: menyimpan rekod pelanggan, pesanan dan pembelian untuk penyelarasan, pengurusan akaun dan rujukan masa depan;'),
-                    t('营销策略：分析客户与购买情况，用于制定营销方案、复购提醒、新品推荐与优惠活动，并通过 WhatsApp、电话或电邮联系您（您可随时要求停止营销信息）；', 'Marketing strategy: analysing customer and purchase information to plan marketing, repeat-order reminders, new-product recommendations and promotions, and contacting you by WhatsApp, phone or email (you may ask us to stop marketing messages at any time);', 'Strategi pemasaran: menganalisis maklumat pelanggan dan pembelian untuk merancang pemasaran, peringatan pesanan semula, cadangan produk baharu dan promosi, serta menghubungi anda melalui WhatsApp, telefon atau e-mel (anda boleh meminta kami berhenti menghantar mesej pemasaran pada bila-bila masa);'),
-                    t('内部记录，以及遵守法律、会计与税务要求。', 'Internal record-keeping and compliance with legal, accounting and tax requirements.', 'Simpanan rekod dalaman dan pematuhan keperluan undang-undang, perakaunan dan cukai.'),
-                  ]}
-                />
-              </Section>
-
-              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('4. 您的同意', '4. Your consent', '4. Persetujuan anda')}>
-                <p>
-                  {t(
-                    '购买时，您须同意将您提供的所有资料（联系方式、送货资料、订单与购买记录、备注等）分享给我们，供我们进行后期的内部跟进、记录及营销策略之用。当您勾选同意框并提交订单或咨询表单，即表示您自愿作出上述同意，并同意我们在您下单后通过 WhatsApp、电话或电邮与您联系。您可随时撤回同意或要求停止营销信息（见第 8 项）。',
-                    'When you purchase, you must agree to share all the information you provide (contact details, delivery details, order and purchase history, remarks, etc.) with us for our later internal follow-up, record-keeping and marketing strategy. By ticking the consent box and submitting an order or enquiry form, you voluntarily give this consent and agree that we may contact you by WhatsApp, phone or email after you order. You may withdraw consent or ask us to stop marketing messages at any time (see item 8).',
-                    'Semasa membuat pembelian, anda mesti bersetuju berkongsi semua maklumat yang anda berikan (butiran hubungan, butiran penghantaran, sejarah pesanan dan pembelian, catatan, dsb.) dengan kami untuk susulan dalaman, simpanan rekod dan strategi pemasaran kami kemudian. Dengan menanda kotak persetujuan dan menghantar pesanan atau borang pertanyaan, anda dengan sukarela memberi persetujuan ini dan bersetuju kami boleh menghubungi anda melalui WhatsApp, telefon atau e-mel selepas anda membuat pesanan. Anda boleh menarik balik persetujuan atau meminta kami berhenti menghantar mesej pemasaran pada bila-bila masa (lihat perkara 8).',
-                  )}
-                </p>
-              </Section>
-
-              <Section icon={<Truck className={icon} />} title={t('5. 资料披露与跨境传输', '5. Disclosure & transfers', '5. Pendedahan & pemindahan')}>
-                <p>
-                  {t(
-                    '我们不会出售您的个人资料。仅在必要时向以下对象披露：内部相关员工；冷链配送与物流伙伴（仅限姓名、电话、送货地址）；付款服务商与银行；专业顾问与审计师；以及依法要求的主管机构。',
-                    'We do not sell your personal data. We disclose it only where necessary to: relevant staff; cold-chain delivery and logistics partners (name, phone and delivery address only); payment providers and banks; professional advisers and auditors; and authorities where required by law.',
-                    'Kami tidak menjual data peribadi anda. Kami hanya mendedahkannya apabila perlu kepada: kakitangan berkaitan; rakan penghantaran dan logistik rantaian sejuk (nama, telefon dan alamat penghantaran sahaja); penyedia pembayaran dan bank; penasihat profesional dan juruaudit; serta pihak berkuasa apabila dikehendaki oleh undang-undang.',
-                  )}
-                </p>
-                <p>
-                  {t(
-                    '我们通过 WhatsApp（Meta）与您沟通，讯息由该服务按其自身政策处理，可能存放在马来西亚境外。本网站托管于 GitHub Pages，托管方可能记录 IP 地址等技术日志。',
-                    'We communicate with you through WhatsApp (Meta); messages are handled by that service under its own policies and may be stored outside Malaysia. This website is hosted on GitHub Pages, whose operator may record technical logs such as IP addresses.',
-                    'Kami berkomunikasi dengan anda melalui WhatsApp (Meta); mesej dikendalikan oleh perkhidmatan tersebut mengikut polisinya sendiri dan mungkin disimpan di luar Malaysia. Laman web ini dihoskan di GitHub Pages, yang pengendalinya mungkin merekod log teknikal seperti alamat IP.',
-                  )}
-                </p>
-              </Section>
-
-              <Section icon={<Lock className={icon} />} title={t('6. 本网站如何保存资料', '6. How this website stores data', '6. Bagaimana laman web ini menyimpan data')}>
-                <p>
-                  {t(
-                    '购物车与订单记录仅保存在您自己浏览器的本地存储中，不会自动上传到服务器；清除浏览器数据即可删除。资料是在您通过 WhatsApp 发送订单或与我们联系时才会到达我们手中。',
-                    'Your cart and order history are kept only in your own browser\'s local storage and are not uploaded to a server automatically; clearing your browser data removes them. Your details reach us only when you send an order through WhatsApp or otherwise contact us.',
-                    'Troli dan sejarah pesanan anda hanya disimpan dalam storan setempat pelayar anda sendiri dan tidak dimuat naik ke pelayan secara automatik; membersihkan data pelayar akan memadamkannya. Maklumat anda hanya sampai kepada kami apabila anda menghantar pesanan melalui WhatsApp atau menghubungi kami.',
-                  )}
-                </p>
-              </Section>
-
-              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('7. 安全、保存期限与资料外泄', '7. Security, retention & breaches', '7. Keselamatan, tempoh simpanan & pelanggaran data')}>
-                <p>
-                  {t(
-                    '我们会采取合理措施保护您的资料，并仅在实现上述目的及法律要求所需的期间内保存。如发生须依法通报的资料外泄，我们将依法通知主管机构及受影响的人士。',
-                    'We take reasonable steps to protect your data and keep it only as long as needed for the purposes above and as required by law. If a data breach occurs that must be reported by law, we will notify the authority and affected individuals as required.',
-                    'Kami mengambil langkah munasabah untuk melindungi data anda dan menyimpannya hanya selama diperlukan untuk tujuan di atas dan seperti yang dikehendaki undang-undang. Jika berlaku pelanggaran data yang mesti dilaporkan mengikut undang-undang, kami akan memaklumkan pihak berkuasa dan individu terjejas seperti yang dikehendaki.',
-                  )}
-                </p>
-              </Section>
-
-              <Section icon={<FileText className={icon} />} title={t('8. 您的权利与联系方式', '8. Your rights & contact', '8. Hak anda & hubungan')}>
-                <p>
-                  {t(
-                    '您有权查阅、更正您的个人资料，撤回同意，或要求我们限制/停止使用（包括停止营销信息）；在适用情况下亦可要求资料可携。撤回同意可能导致我们无法继续处理订单或售后。',
-                    'You may ask to access or correct your personal data, withdraw your consent, or ask us to limit or stop using it (including stopping marketing messages); where applicable you may also request data portability. Withdrawing consent may mean we can no longer process your order or after-sales.',
-                    'Anda boleh meminta akses atau pembetulan data peribadi anda, menarik balik persetujuan, atau meminta kami mengehadkan atau berhenti menggunakannya (termasuk berhenti menghantar mesej pemasaran); jika berkenaan, anda juga boleh meminta kebolehpindahan data. Menarik balik persetujuan mungkin bermakna kami tidak lagi dapat memproses pesanan atau khidmat lepas jualan anda.',
-                  )}
-                </p>
-                <p className="font-mono text-stone-800">
-                  {t('联系我们：', 'Contact: ', 'Hubungi kami: ')}010-882 2608 · orientalfood9319@gmail.com
-                </p>
-              </Section>
-
-              <p className="text-[11px] text-stone-500">
-                {t(
-                  `本服务不面向 18 岁以下人士。本通知会不时更新，最后更新：${LAST_UPDATED}。各语言版本如有出入，以英文版为准。`,
-                  `Our service is not directed at persons under 18. This notice may be updated from time to time. Last updated: ${LAST_UPDATED}. If the language versions differ, the English version prevails.`,
-                  `Perkhidmatan kami tidak ditujukan kepada individu di bawah 18 tahun. Notis ini boleh dikemas kini dari semasa ke semasa. Kemas kini terakhir: ${LAST_UPDATED}. Jika versi bahasa berbeza, versi Inggeris diutamakan.`,
-                )}
-              </p>
             </div>
           )}
         </div>

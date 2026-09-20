@@ -341,10 +341,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     />
                     <span>
                       {lang === 'zh'
-                        ? '我同意将我提供的所有资料分享给东升食品，供其进行后期的内部跟进、记录及营销策略之用，并已阅读'
+                        ? '我同意将我提供的所有资料用于后续跟进、记录及营销，并已阅读'
                         : lang === 'ms'
-                        ? 'Saya bersetuju berkongsi semua maklumat yang saya berikan dengan Oriental Food untuk susulan dalaman, simpanan rekod dan strategi pemasaran, dan telah membaca'
-                        : 'I agree to share all the information I provide with Oriental Food for internal follow-up, record-keeping and marketing strategy, and I have read the'}{' '}
+                        ? 'Saya bersetuju maklumat saya digunakan untuk susulan, rekod dan pemasaran, dan telah membaca'
+                        : 'I agree my information may be used for follow-up, records and marketing, and I have read the'}{' '}
                       <button
                         type="button"
                         onClick={onOpenPolicy}
