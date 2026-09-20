@@ -53,10 +53,10 @@ export const DisclaimerModal: React.FC<DisclaimerModalProps> = ({
   lang,
   initialTab,
 }) => {
-  const [activeTab, setActiveTab] = useState<PolicyTab>('terms');
+  const [activeTab, setActiveTab] = useState<PolicyTab>('returns');
 
   useEffect(() => {
-    if (isOpen) setActiveTab(initialTab ?? 'terms');
+    if (isOpen) setActiveTab(initialTab ?? 'returns');
   }, [isOpen, initialTab]);
 
   if (!isOpen) return null;
@@ -65,9 +65,9 @@ export const DisclaimerModal: React.FC<DisclaimerModalProps> = ({
   const icon = 'w-4 h-4 text-amber-700';
 
   const tabs: { id: PolicyTab; label: string }[] = [
-    { id: 'terms', label: t('条款与细则', 'Terms & Conditions', 'Terma & Syarat') },
-    { id: 'returns', label: t('退换货政策', 'Refund & Return Policy', 'Polisi Bayaran Balik & Pemulangan') },
-    { id: 'pdpa', label: t('个人资料保护 (PDPA)', 'Privacy / PDPA', 'Privasi / PDPA') },
+    { id: 'returns', label: t('1. 退换货政策', '1. Refund and Return Policy', '1. Polisi Bayaran Balik & Pemulangan') },
+    { id: 'terms', label: t('2. 条款与细则', '2. Terms and Conditions Policy', '2. Terma & Syarat') },
+    { id: 'pdpa', label: t('3. 个人资料保护 (PDPA)', '3. PDPA', '3. PDPA') },
   ];
 
   return (

@@ -50,8 +50,8 @@ export default function App() {
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState<boolean>(false);
   const [disclaimerModalOpen, setDisclaimerModalOpen] = useState<boolean>(false);
-  const [policyTab, setPolicyTab] = useState<PolicyTab>('terms');
-  const openPolicy = (tab: PolicyTab = 'terms') => {
+  const [policyTab, setPolicyTab] = useState<PolicyTab>('returns');
+  const openPolicy = (tab: PolicyTab = 'returns') => {
     setPolicyTab(tab);
     setDisclaimerModalOpen(true);
   };
@@ -267,7 +267,7 @@ export default function App() {
         onOpenCart={() => setCartDrawerOpen(true)}
         onOpenOEM={scrollToOEM}
         onOpenOrderHistory={() => setOrderHistoryModalOpen(true)}
-        onOpenPolicy={() => openPolicy('terms')}
+        onOpenPolicy={() => openPolicy('returns')}
         onOpenHalalStatement={() => setHalalStatementModalOpen(true)}
         orderHistoryCount={orderHistory.length}
       />
@@ -389,7 +389,7 @@ export default function App() {
       <Footer 
         lang={lang} 
         onCategorySelect={setActiveCategory} 
-        onOpenDisclaimer={() => openPolicy('terms')}
+        onOpenDisclaimer={() => openPolicy('returns')}
         onOpenHalalStatement={() => setHalalStatementModalOpen(true)}
       />
 
