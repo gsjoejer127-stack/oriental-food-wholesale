@@ -83,6 +83,16 @@ export const Footer: React.FC<FooterProps> = ({ lang, onCategorySelect, onOpenDi
                 <Truck className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
                 <span>外坡 Outstation: 满 <strong className="text-stone-200">RM800</strong> 免费配送</span>
               </li>
+              {onOpenDisclaimer && (
+                <li className="pl-5">
+                  <button
+                    onClick={onOpenDisclaimer}
+                    className="text-amber-400 hover:text-amber-300 underline underline-offset-2 font-semibold cursor-pointer"
+                  >
+                    T&C Apply
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 
