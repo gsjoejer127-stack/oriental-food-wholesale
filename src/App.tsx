@@ -21,7 +21,7 @@ import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { OrderReceiptModal } from './components/OrderReceiptModal';
-import { DisclaimerModal } from './components/DisclaimerModal';
+import { DisclaimerModal, PolicyTab } from './components/DisclaimerModal';
 import { OrderHistoryModal } from './components/OrderHistoryModal';
 import { HalalStatementModal } from './components/HalalStatementModal';
 import { FloatingWhatsAppButton } from './components/FloatingWhatsAppButton';
@@ -50,6 +50,11 @@ export default function App() {
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState<boolean>(false);
   const [disclaimerModalOpen, setDisclaimerModalOpen] = useState<boolean>(false);
+  const [policyTab, setPolicyTab] = useState<PolicyTab>('terms');
+  const openPolicy = (tab: PolicyTab = 'terms') => {
+    setPolicyTab(tab);
+    setDisclaimerModalOpen(true);
+  };
   const [checkoutZone, setCheckoutZone] = useState<DeliveryZone>('klang_valley');
   const [completedOrder, setCompletedOrder] = useState<Order | null>(null);
   const [halalStatementModalOpen, setHalalStatementModalOpen] = useState<boolean>(false);
@@ -377,13 +382,13 @@ export default function App() {
       </main>
 
       {/* B2B OEM & Supply Chain Inquiry Section */}
-      <OEMInquirySection lang={lang} />
+      <OEMInquirySection lang={lang} onOpenPolicy={() => openPolicy('pdpa')} />
 
       {/* Footer */}
       <Footer 
         lang={lang} 
         onCategorySelect={setActiveCategory} 
-        onOpenDisclaimer={() => setDisclaimerModalOpen(true)}
+        onOpenDisclaimer={() => openPolicy('terms')}
         onOpenHalalStatement={() => setHalalStatementModalOpen(true)}
       />
 
@@ -415,6 +420,7 @@ export default function App() {
         defaultZone={checkoutZone}
         lang={lang}
         onOrderComplete={handleOrderComplete}
+        onOpenPolicy={() => openPolicy('pdpa')}
       />
 
       <OrderReceiptModal
@@ -438,6 +444,7 @@ export default function App() {
 
       <DisclaimerModal
         isOpen={disclaimerModalOpen}
+        initialTab={policyTab}
         onClose={() => setDisclaimerModalOpen(false)}
         lang={lang}
         onOpenHalalStatement={() => setHalalStatementModalOpen(true)}

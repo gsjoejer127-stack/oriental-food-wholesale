@@ -26,6 +26,7 @@ interface CheckoutModalProps {
   defaultZone: DeliveryZone;
   lang: Language;
   onOrderComplete: (order: Order) => void;
+  onOpenPolicy?: () => void;
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({
@@ -35,6 +36,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   defaultZone,
   lang,
   onOrderComplete,
+  onOpenPolicy,
 }) => {
   if (!isOpen) return null;
 
@@ -54,6 +56,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     paymentMethod: 'fpx',
   });
 
+  const [pdpaConsent, setPdpaConsent] = useState<boolean>(false);
   const [selectedBank, setSelectedBank] = useState<string>('maybank');
   const [cardNumber, setCardNumber] = useState<string>('');
   const [cardExpiry, setCardExpiry] = useState<string>('');
@@ -82,6 +85,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     e.preventDefault();
     if (!formData.fullName || !formData.phone || !formData.address) {
       alert(lang === 'zh' ? '请填写姓名、电话和送货地址' : 'Please fill in name, phone, and delivery address.');
+      return;
+    }
+    if (!pdpaConsent) {
+      alert(
+        lang === 'zh'
+          ? '请先勾选同意个人资料保护 (PDPA) 与条款'
+          : lang === 'ms'
+          ? 'Sila tandakan persetujuan PDPA dan terma terlebih dahulu.'
+          : 'Please tick the PDPA and terms consent box first.'
+      );
       return;
     }
     setStep('payment');
@@ -318,9 +331,30 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       RM {grandTotal.toFixed(2)}
                     </span>
                   </div>
-                  <p className="text-[10px] text-stone-400 mt-0.5">
-                    * {lang === 'zh' ? '提交订单即代表同意本公司 Terma & Syarat 冷链配送与批发采购条款' : lang === 'ms' ? 'Menghantar pesanan bermaksud anda bersetuju dengan Terma & Syarat Pembekalan Borong' : 'By submitting order, you agree to our Cold-Chain Delivery & Wholesale Terms'}
-                  </p>
+                  <label className="flex items-start gap-2 mt-2 max-w-md text-[11px] leading-relaxed text-stone-600 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      required
+                      checked={pdpaConsent}
+                      onChange={(e) => setPdpaConsent(e.target.checked)}
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-amber-700"
+                    />
+                    <span>
+                      {lang === 'zh'
+                        ? '我同意将我提供的所有资料分享给东升食品，供其进行后期的内部跟进、记录及营销策略之用，并已阅读'
+                        : lang === 'ms'
+                        ? 'Saya bersetuju berkongsi semua maklumat yang saya berikan dengan Oriental Food untuk susulan dalaman, simpanan rekod dan strategi pemasaran, dan telah membaca'
+                        : 'I agree to share all the information I provide with Oriental Food for internal follow-up, record-keeping and marketing strategy, and I have read the'}{' '}
+                      <button
+                        type="button"
+                        onClick={onOpenPolicy}
+                        className="text-amber-700 underline font-semibold"
+                      >
+                        T&C Apply
+                      </button>
+                      {lang === 'zh' ? '（含 PDPA 与退换货政策）。' : lang === 'ms' ? ' (termasuk PDPA dan polisi pemulangan).' : ' (including PDPA and the refund & return policy).'}
+                    </span>
+                  </label>
                 </div>
                 <button
                   type="submit"

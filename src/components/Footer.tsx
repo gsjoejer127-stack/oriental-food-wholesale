@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, ShieldCheck, Truck, ChevronRight } from 'lucide-react';
+import { MapPin, Phone, Mail, Truck, ChevronRight } from 'lucide-react';
 
 import { Language } from '../types';
 
@@ -83,10 +83,6 @@ export const Footer: React.FC<FooterProps> = ({ lang, onCategorySelect, onOpenDi
                 <Truck className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
                 <span>外坡 Outstation: 满 <strong className="text-stone-200">RM800</strong> 免费配送</span>
               </li>
-              <li className="flex items-start gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                <span>未达最低金额按地区收取运费；冷冻产品需有人接收，二次配送可能另行收费。</span>
-              </li>
             </ul>
           </div>
 
@@ -124,30 +120,16 @@ export const Footer: React.FC<FooterProps> = ({ lang, onCategorySelect, onOpenDi
           </div>
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500">
-          <div>
-            <div>© {new Date().getFullYear()} 东升食品 ORIENTAL FOOD WHOLESALE SDN. BHD. ( 1653595-A ). All Rights Reserved.</div>
-            <div className="text-[10px] text-stone-400 mt-0.5">
-              {lang === 'zh'
-                ? '免责声明：此页面由 AI 生成，可能会出错，只供参考。'
-                : lang === 'ms'
-                ? 'Penafian: Halaman ini dijana oleh AI, mungkin terdapat kesilapan dan adalah untuk rujukan sahaja.'
-                : 'Disclaimer: This page is AI-generated, may contain errors, and is for reference only.'}
-            </div>
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
-            {onOpenDisclaimer && (
-              <button 
-                onClick={onOpenDisclaimer} 
-                className="text-amber-400 hover:text-amber-300 underline font-semibold flex items-center gap-1 cursor-pointer"
-              >
-                <span>{lang === 'zh' ? '查看批发采购条款与细则' : 'Terms & Conditions'}</span>
-              </button>
-            )}
-
-            <span className="text-stone-500">|</span>
-            <span>规格单价仅供参考，请以发票实物为准。</span>
-          </div>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-stone-500">
+          <div>© {new Date().getFullYear()} 东升食品 ORIENTAL FOOD WHOLESALE SDN. BHD. ( 1653595-A ). All Rights Reserved.</div>
+          {onOpenDisclaimer && (
+            <button
+              onClick={onOpenDisclaimer}
+              className="text-stone-400 hover:text-amber-300 underline underline-offset-2 font-semibold cursor-pointer"
+            >
+              T&C Apply
+            </button>
+          )}
         </div>
       </div>
     </footer>

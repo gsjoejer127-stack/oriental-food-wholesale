@@ -5,10 +5,12 @@ import { Language } from '../types';
 
 interface OEMInquirySectionProps {
   lang: Language;
+  onOpenPolicy?: () => void;
 }
 
-export const OEMInquirySection: React.FC<OEMInquirySectionProps> = ({ lang }) => {
+export const OEMInquirySection: React.FC<OEMInquirySectionProps> = ({ lang, onOpenPolicy }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [pdpaConsent, setPdpaConsent] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -207,6 +209,27 @@ export const OEMInquirySection: React.FC<OEMInquirySectionProps> = ({ lang }) =>
                     className="w-full px-3 py-2 bg-stone-100 border border-stone-300 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
                   />
                 </div>
+
+                <label className="flex items-start gap-2 text-[11px] leading-relaxed text-stone-600 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={pdpaConsent}
+                    onChange={(e) => setPdpaConsent(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-amber-700"
+                  />
+                  <span>
+                    {lang === 'zh'
+                      ? '我同意将我提供的所有资料分享给东升食品，供其进行后期的内部跟进、记录及营销策略之用，并已阅读'
+                      : lang === 'ms'
+                      ? 'Saya bersetuju berkongsi semua maklumat yang saya berikan dengan Oriental Food untuk susulan dalaman, simpanan rekod dan strategi pemasaran, dan telah membaca'
+                      : 'I agree to share all the information I provide with Oriental Food for internal follow-up, record-keeping and marketing strategy, and I have read the'}{' '}
+                    <button type="button" onClick={onOpenPolicy} className="text-amber-700 underline font-semibold">
+                      T&C Apply
+                    </button>
+                    {lang === 'zh' ? '（含 PDPA）。' : lang === 'ms' ? ' (termasuk PDPA).' : ' (including PDPA).'}
+                  </span>
+                </label>
 
                 <button
                   type="submit"
