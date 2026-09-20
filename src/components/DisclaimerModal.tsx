@@ -343,12 +343,64 @@ export const DisclaimerModal: React.FC<DisclaimerModalProps> = ({
           {/* ───────────── PDPA ───────────── */}
           {activeTab === 'pdpa' && (
             <div className="space-y-4 animate-fadeIn">
-              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('个人资料 (PDPA)', 'Personal Data (PDPA)', 'Data Peribadi (PDPA)')}>
-                <p className="text-sm text-stone-700">
+              <p className="text-xs text-stone-600">
+                {t(
+                  '本声明依据马来西亚《2010 年个人资料保护法令》（PDPA）发出。资料使用者：ORIENTAL FOOD WHOLESALE SDN. BHD.（1653595-A）。',
+                  "This notice is issued under Malaysia's Personal Data Protection Act 2010 (PDPA). Data user: ORIENTAL FOOD WHOLESALE SDN. BHD. (1653595-A).",
+                  'Notis ini dikeluarkan di bawah Akta Perlindungan Data Peribadi 2010 (PDPA) Malaysia. Pengguna data: ORIENTAL FOOD WHOLESALE SDN. BHD. (1653595-A).',
+                )}
+              </p>
+              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('1. 同意', '1. Consent', '1. Persetujuan')}>
+                <p>
                   {t(
-                    '购买时，您同意将您提供的所有资料分享给东升食品，供我们进行后期的内部跟进、记录及营销策略之用。',
-                    'By purchasing, you agree to share all the information you provide with Oriental Food for our internal follow-up, record-keeping and marketing strategy.',
-                    'Dengan membuat pembelian, anda bersetuju berkongsi semua maklumat yang anda berikan dengan Oriental Food untuk susulan dalaman, simpanan rekod dan strategi pemasaran kami.',
+                    '当您通过本网站、WhatsApp、电话、电邮或其他渠道询价、索取样品或下单时，即表示您已阅读本声明，并同意本公司为下述目的收集、使用及披露您的个人资料，包括后续跟进联系及产品推广。',
+                    'By making an enquiry, requesting a sample or placing an order through this website, WhatsApp, telephone, email or any other channel, you confirm that you have read this notice and consent to the Company collecting, using and disclosing your personal data for the purposes below, including follow-up contact and product marketing.',
+                    'Dengan membuat pertanyaan, meminta sampel atau membuat pesanan melalui laman web ini, WhatsApp, telefon, e-mel atau mana-mana saluran lain, anda mengesahkan bahawa anda telah membaca notis ini dan bersetuju Syarikat mengumpul, menggunakan dan mendedahkan data peribadi anda bagi tujuan di bawah, termasuk hubungan susulan dan pemasaran produk.',
+                  )}
+                </p>
+              </Section>
+              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('2. 我们收集的资料', '2. Data we collect', '2. Data yang kami kumpul')}>
+                <p>
+                  {t(
+                    '姓名、公司名称、联络电话 / WhatsApp、电邮、送货与账单地址、订单与付款记录，以及与本公司的往来讯息。',
+                    'Name, company name, phone / WhatsApp number, email, delivery and billing address, order and payment records, and your correspondence with the Company.',
+                    'Nama, nama syarikat, nombor telefon / WhatsApp, e-mel, alamat penghantaran dan bil, rekod pesanan dan pembayaran, serta surat-menyurat anda dengan Syarikat.',
+                  )}
+                </p>
+              </Section>
+              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('3. 使用目的', '3. Purposes', '3. Tujuan')}>
+                <p>
+                  {t(
+                    '处理询价与订单、安排配送、开立发票与收款、售后处理、后续跟进联系、内部记录，以及发送新品、价目表与促销信息。',
+                    'Handling enquiries and orders, arranging delivery, invoicing and collection, after-sales, follow-up contact, internal records, and sending you information on new products, price lists and promotions.',
+                    'Mengendalikan pertanyaan dan pesanan, mengatur penghantaran, mengeluarkan invois dan kutipan, perkhidmatan selepas jualan, hubungan susulan, rekod dalaman, serta menghantar maklumat produk baharu, senarai harga dan promosi kepada anda.',
+                  )}
+                </p>
+              </Section>
+              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('4. 资料披露与跨境传输', '4. Disclosure and transfers outside Malaysia', '4. Pendedahan dan pemindahan di luar Malaysia')}>
+                <p>
+                  {t(
+                    '本公司可能将您的资料披露给冷链与物流服务商、银行与支付服务商、WhatsApp / Meta 及 Google 等通讯平台、会计师与法律顾问，以及依法有权要求的机关。因使用 WhatsApp 等服务，资料可能存放在马来西亚境外，您提交资料即表示同意。',
+                    'The Company may disclose your data to cold-chain and logistics providers, banks and payment providers, communication platforms such as WhatsApp / Meta and Google, accountants and legal advisers, and authorities entitled to require it by law. Because we use services such as WhatsApp, your data may be stored outside Malaysia; by submitting your data you consent to this.',
+                    'Syarikat boleh mendedahkan data anda kepada penyedia rantaian sejuk dan logistik, bank dan penyedia pembayaran, platform komunikasi seperti WhatsApp / Meta dan Google, akauntan dan penasihat undang-undang, serta pihak berkuasa yang berhak memintanya di sisi undang-undang. Oleh kerana kami menggunakan perkhidmatan seperti WhatsApp, data anda mungkin disimpan di luar Malaysia; dengan menghantar data anda, anda bersetuju dengan perkara ini.',
+                  )}
+                </p>
+              </Section>
+              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('5. 保存期限', '5. Retention', '5. Tempoh simpanan')}>
+                <p>
+                  {t(
+                    '在业务及法律所需的期间内保存。',
+                    'Kept for as long as needed for business purposes and as required by law.',
+                    'Disimpan selama diperlukan untuk tujuan perniagaan dan seperti yang dikehendaki undang-undang.',
+                  )}
+                </p>
+              </Section>
+              <Section icon={<ShieldCheck className="w-4 h-4 text-emerald-600" />} title={t('6. 您的权利与停止推广', '6. Your rights and stopping marketing', '6. Hak anda dan berhenti pemasaran')}>
+                <p>
+                  {t(
+                    '您可要求查阅或更正您的个人资料，也可随时通过 WhatsApp 010-882 2608 或电邮 orientalfood9319@gmail.com 要求停止将您的资料用于推广。停止推广不影响订单履行、售后服务及法定记录保存。',
+                    'You may ask to access or correct your personal data, and at any time ask us to stop using it for marketing via WhatsApp 010-882 2608 or orientalfood9319@gmail.com. Stopping marketing does not affect order fulfilment, after-sales service or statutory record keeping.',
+                    'Anda boleh meminta akses atau pembetulan data peribadi anda, dan pada bila-bila masa meminta kami berhenti menggunakannya untuk pemasaran melalui WhatsApp 010-882 2608 atau orientalfood9319@gmail.com. Berhenti pemasaran tidak menjejaskan pemenuhan pesanan, perkhidmatan selepas jualan atau penyimpanan rekod berkanun.',
                   )}
                 </p>
               </Section>

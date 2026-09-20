@@ -230,10 +230,10 @@ export const OEMInquirySection: React.FC<OEMInquirySectionProps> = ({ lang, onOp
                   />
                   <span>
                     {lang === 'zh'
-                      ? '我同意将我提供的所有资料用于后续跟进、记录及营销，并已阅读'
+                      ? '我已阅读并同意'
                       : lang === 'ms'
-                      ? 'Saya bersetuju maklumat saya digunakan untuk susulan, rekod dan pemasaran, dan telah membaca'
-                      : 'I agree my information may be used for follow-up, records and marketing, and I have read the'}{' '}
+                      ? 'Saya telah membaca dan bersetuju dengan'
+                      : 'I have read and agree to the'}{' '}
                     <button type="button" onClick={onOpenPolicy} className="text-amber-700 underline font-semibold">
                       T&C Apply
                     </button>
