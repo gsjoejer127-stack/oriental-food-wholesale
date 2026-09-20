@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { 
   X, 
-  CreditCard, 
   QrCode, 
   Building2, 
   CheckCircle2, 
@@ -58,9 +57,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   const [pdpaConsent, setPdpaConsent] = useState<boolean>(false);
   const [selectedBank, setSelectedBank] = useState<string>('maybank');
-  const [cardNumber, setCardNumber] = useState<string>('');
-  const [cardExpiry, setCardExpiry] = useState<string>('');
-  const [cardCvc, setCardCvc] = useState<string>('');
   const [receiptFile, setReceiptFile] = useState<string | null>(null);
   const [tngTimer, setTngTimer] = useState<number>(300); // 5 mins
 
@@ -381,7 +377,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   </button>
                 </h3>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+                <div className="grid grid-cols-3 gap-2 mb-6">
                   <button
                     type="button"
                     onClick={() => handleInputChange('paymentMethod', 'fpx')}
@@ -406,19 +402,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   >
                     <QrCode className="w-5 h-5 text-sky-600 mb-1" />
                     <span className="text-xs">Touch 'n Go</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInputChange('paymentMethod', 'card')}
-                    className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center transition-all ${
-                      formData.paymentMethod === 'card'
-                        ? 'border-purple-600 bg-purple-50 text-purple-950 font-bold shadow-sm'
-                        : 'border-stone-200 bg-stone-50 text-stone-600'
-                    }`}
-                  >
-                    <CreditCard className="w-5 h-5 text-purple-600 mb-1" />
-                    <span className="text-xs">{lang === 'zh' ? '信用卡/Debit' : 'Kad Kredit/Debit'}</span>
                   </button>
 
                   <button
@@ -482,51 +465,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     <p className="text-[11px] text-sky-800">
                       {lang === 'zh' ? '请使用 Touch \'n Go App 扫描上方二维码进行支付' : 'Scan QR code with your Touch \'n Go eWallet app.'}
                     </p>
-                  </div>
-                )}
-
-                {/* Sub-Panel: Credit / Debit Card */}
-                {formData.paymentMethod === 'card' && (
-                  <div className="bg-stone-50 p-4 rounded-2xl border border-stone-200 space-y-3">
-                    <div>
-                      <label className="text-xs font-medium text-stone-600 mb-1 block">
-                        卡号 Card Number
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="4532 •••• •••• 8888"
-                        value={cardNumber}
-                        onChange={(e) => setCardNumber(e.target.value)}
-                        className="w-full px-3 py-2 bg-white border border-stone-300 rounded-xl text-xs font-mono"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-xs font-medium text-stone-600 mb-1 block">
-                          有效期 Exp
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="MM/YY"
-                          value={cardExpiry}
-                          onChange={(e) => setCardExpiry(e.target.value)}
-                          className="w-full px-3 py-2 bg-white border border-stone-300 rounded-xl text-xs font-mono"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs font-medium text-stone-600 mb-1 block">
-                          CVC
-                        </label>
-                        <input
-                          type="password"
-                          maxLength={4}
-                          placeholder="•••"
-                          value={cardCvc}
-                          onChange={(e) => setCardCvc(e.target.value)}
-                          className="w-full px-3 py-2 bg-white border border-stone-300 rounded-xl text-xs font-mono"
-                        />
-                      </div>
-                    </div>
                   </div>
                 )}
 

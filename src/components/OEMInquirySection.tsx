@@ -22,6 +22,16 @@ export const OEMInquirySection: React.FC<OEMInquirySectionProps> = ({ lang, onOp
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const text = [
+      '*东升食品 - OEM / 采购咨询*',
+      `姓名 Name: ${formData.name}`,
+      `电话 Tel: ${formData.phone}`,
+      `公司 Company: ${formData.company || '-'}`,
+      `类目 Category: ${formData.productType}`,
+      `月采购量 Volume: ${formData.monthlyVolume}`,
+      `需求 Remarks: ${formData.message || '-'}`,
+    ].join('\n');
+    window.open(`https://wa.me/60108822608?text=${encodeURIComponent(text)}`, '_blank');
     setSubmitted(true);
   };
 
@@ -95,14 +105,14 @@ export const OEMInquirySection: React.FC<OEMInquirySectionProps> = ({ lang, onOp
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold text-stone-900">
-                  {lang === 'zh' ? '定制询价已提交！' : lang === 'ms' ? 'Pertanyaan OEM Berjaya Dihantar!' : 'Inquiry Submitted!'}
+                  {lang === 'zh' ? '请在 WhatsApp 点击发送' : lang === 'ms' ? 'Sila tekan hantar di WhatsApp' : 'Please tap Send in WhatsApp'}
                 </h3>
                 <p className="text-xs text-stone-600 max-w-sm mx-auto">
                   {lang === 'zh'
-                    ? '我们的餐饮供应链顾问将在下一个工作日内（工作时间：周一至周五 10:00 AM - 6:00 PM）与您联系，洽谈试样与配方研发事项。'
+                    ? 'WhatsApp 已为您打开并填好咨询内容，点击发送即可完成提交。'
                     : lang === 'ms'
-                    ? 'Pakar rantaian bekalan kami akan menghubungi anda dalam masa 1 hari bekerja (Isnin-Jumaat 10:00 AM - 6:00 PM).'
-                    : 'Our supply chain specialist will contact you on the next business day (Operating Hours: Mon-Fri 10:00 AM - 6:00 PM).'}
+                    ? 'WhatsApp telah dibuka dengan maklumat pertanyaan anda. Tekan hantar untuk melengkapkan.'
+                    : 'WhatsApp has opened with your enquiry filled in. Tap Send to complete it.'}
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
