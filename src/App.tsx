@@ -29,22 +29,25 @@ import { OEMInquirySection } from './components/OEMInquirySection';
 import { Footer } from './components/Footer';
 import { CATEGORIES, PRODUCTS } from './data/products';
 import { CartItem, DeliveryZone, Language, Order, Product } from './types';
+import { useCart } from './hooks/useCart';
+import { navigate } from './lib/routes';
+import { CatalogTopBar } from './components/CatalogTopBar';
 
-export default function App() {
-  const [lang, setLang] = useState<Language>('zh');
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+interface AppProps {
+  lang: Language;
+  setLang: (lang: Language) => void;
+  /** Cart state is owned by Root so the quick-order sheet shares the same list. */
+  cart: ReturnType<typeof useCart>;
+  /** Category preselected from the route, e.g. "#/catalog?cat=soup_base". */
+  initialCategory?: string;
+}
+
+export default function App({ lang, setLang, cart, initialCategory }: AppProps) {
+  const [activeCategory, setActiveCategory] = useState<string>(initialCategory || 'all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<'default' | 'price_low' | 'price_high' | 'code'>('default');
 
-  // Shopping Cart state with localStorage persistence
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    try {
-      const saved = localStorage.getItem('oriental_food_cart');
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  const { cartItems, setCartItems } = cart;
 
   const [cartDrawerOpen, setCartDrawerOpen] = useState<boolean>(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
@@ -79,71 +82,10 @@ export default function App() {
     }
   }, [orderHistory]);
 
-  // Sync cart to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('oriental_food_cart', JSON.stringify(cartItems));
-    } catch (e) {
-      console.error(e);
-    }
-  }, [cartItems]);
-
-  // Add to cart handler
-  const handleAddToCart = (product: Product, packOption: 'unit' | 'carton', quantity: number) => {
-    const pricePerUnit =
-      packOption === 'carton' && product.pricing.cartonPrice !== null
-        ? product.pricing.cartonPrice
-        : product.pricing.unitPrice;
-
-    setCartItems((prev) => {
-      const existingIdx = prev.findIndex(
-        (i) => i.product.id === product.id && i.packOption === packOption
-      );
-
-      if (existingIdx > -1) {
-        const updated = [...prev];
-        updated[existingIdx].quantity += quantity;
-        return updated;
-      } else {
-        return [
-          ...prev,
-          {
-            product,
-            packOption,
-            quantity,
-            pricePerUnit,
-          },
-        ];
-      }
-    });
-  };
-
-  // Update quantity in cart
-  const handleUpdateQuantity = (productId: number, packOption: 'unit' | 'carton', delta: number) => {
-    setCartItems((prev) =>
-      prev
-        .map((item) => {
-          if (item.product.id === productId && item.packOption === packOption) {
-            const newQty = item.quantity + delta;
-            return newQty > 0 ? { ...item, quantity: newQty } : null;
-          }
-          return item;
-        })
-        .filter(Boolean) as CartItem[]
-    );
-  };
-
-  // Remove item from cart
-  const handleRemoveItem = (productId: number, packOption: 'unit' | 'carton') => {
-    setCartItems((prev) =>
-      prev.filter((i) => !(i.product.id === productId && i.packOption === packOption))
-    );
-  };
-
-  // Clear cart
-  const handleClearCart = () => {
-    setCartItems([]);
-  };
+  const handleAddToCart = cart.addToCart;
+  const handleUpdateQuantity = cart.updateQuantity;
+  const handleRemoveItem = cart.removeItem;
+  const handleClearCart = cart.clearCart;
 
   // Open checkout modal
   const handleProceedToCheckout = (zone: DeliveryZone) => {
@@ -187,6 +129,11 @@ export default function App() {
     setOrderHistoryModalOpen(false);
     setCartDrawerOpen(true);
   };
+
+  // Follow the category carried in the route hash (set from the landing page)
+  useEffect(() => {
+    if (initialCategory) setActiveCategory(initialCategory);
+  }, [initialCategory]);
 
   // Scroll to catalog section
   const scrollToCatalog = () => {
@@ -255,6 +202,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-stone-100 font-sans text-stone-900 flex flex-col antialiased selection:bg-amber-500 selection:text-white">
+      {/* Landing page / quick order shortcuts */}
+      <CatalogTopBar lang={lang} onQuickOrder={() => navigate('order')} />
+
       {/* Top Responsive Navigation Bar */}
       <Navbar
         activeCategory={activeCategory}
