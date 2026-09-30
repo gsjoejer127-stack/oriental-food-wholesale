@@ -17,7 +17,7 @@ import {
   Truck,
   Wallet,
 } from 'lucide-react';
-import { CATEGORIES, PRODUCTS } from '../data/products';
+import { CATEGORIES, PRODUCT_COUNT, PRODUCTS } from '../data/products';
 import { Language } from '../types';
 import { categoryName, productName, whatsappLink } from '../lib/order';
 import { navigate } from '../lib/routes';
@@ -43,22 +43,22 @@ const COPY = {
     title2: '批发价目表',
     slogan: '让餐饮更简单，让标准化成为增长的力量。',
     intro:
-      '冷冻料理包、火锅汤底、串串烧烤、养生汤包、Halal 清真丸子等 74 款标准化食材，明码实价。支持单包零购与整箱批发，巴生谷冷链直送。',
+      `冷冻料理包、火锅汤底、串串烧烤、养生汤包、Halal 清真丸子等 ${PRODUCT_COUNT} 款标准化食材，明码实价。支持单包零购与整箱批发，巴生谷冷链直送。`,
     ctaPrice: '查看批发价目表',
     ctaOrder: '一分钟快速下单',
     ctaWhatsapp: 'WhatsApp 直接咨询',
     statsLabel: ['款食材', '大类目', '起订量', '冷链配送'],
-    statsValue: ['74', '14', '1 包', '巴生谷'],
+    statsValue: [String(PRODUCT_COUNT), '14', '1 包', '巴生谷'],
     howTitle: '下单只需 3 步',
     howSub: '不必注册、不必登录，看价格、填数量、WhatsApp 确认。',
     steps: [
-      { t: '看价目表', d: '74 款食材明码实价，单包价与整箱价一目了然。' },
+      { t: '看价目表', d: `${PRODUCT_COUNT} 款食材明码实价，单包价与整箱价一目了然。` },
       { t: '填数量', d: '在价目表上直接输入要几包、几箱，系统自动算总额与运费。' },
       { t: 'WhatsApp 确认', d: '一键把订单发到我们 WhatsApp，销售确认现货与送货时间。' },
     ],
     catTitle: '批发类目',
     catSub: '点击任意类目，直接进入该类目的价目表。',
-    catAll: '查看全部 74 款价目表',
+    catAll: `查看全部 ${PRODUCT_COUNT} 款价目表`,
     popTitle: '热销单品',
     popSub: '餐厅、火锅店、Cafe 回购率最高的几款。',
     popAdd: '加入订单',
@@ -92,22 +92,22 @@ const COPY = {
     title2: 'WHOLESALE PRICE LIST',
     slogan: 'Making food service simpler — turning standardization into the power of growth.',
     intro:
-      '74 standardized products: frozen ready meals, hotpot bases, skewers, herbal soup packs and Halal balls. Transparent pricing, single packet or full carton, cold-chain delivery across Klang Valley.',
+      `${PRODUCT_COUNT} standardized products: frozen ready meals, hotpot bases, skewers, herbal soup packs and Halal balls. Transparent pricing, single packet or full carton, cold-chain delivery across Klang Valley.`,
     ctaPrice: 'View Wholesale Price List',
     ctaOrder: 'Quick Order in 1 Minute',
     ctaWhatsapp: 'Chat on WhatsApp',
     statsLabel: ['Products', 'Categories', 'Min. Order', 'Cold Chain'],
-    statsValue: ['74', '14', '1 pkt', 'Klang Valley'],
+    statsValue: [String(PRODUCT_COUNT), '14', '1 pkt', 'Klang Valley'],
     howTitle: 'Order in 3 Steps',
     howSub: 'No sign-up, no login. See the price, enter the quantity, confirm on WhatsApp.',
     steps: [
-      { t: 'Open the price list', d: 'All 74 products with unit price and full carton price side by side.' },
+      { t: 'Open the price list', d: `All ${PRODUCT_COUNT} products with unit price and full carton price side by side.` },
       { t: 'Enter quantities', d: 'Type how many packets or cartons — subtotal and delivery fee are calculated for you.' },
       { t: 'Send on WhatsApp', d: 'One tap sends the order to our WhatsApp; sales confirm stock and delivery time.' },
     ],
     catTitle: 'Wholesale Categories',
     catSub: 'Tap any category to open that section of the price list.',
-    catAll: 'View all 74 products',
+    catAll: `View all ${PRODUCT_COUNT} products`,
     popTitle: 'Best Sellers',
     popSub: 'The lines restaurants, hotpot outlets and cafés reorder most.',
     popAdd: 'Add to order',
@@ -142,22 +142,22 @@ const COPY = {
     slogan:
       'Mempermudahkan perkhidmatan makanan — menjadikan standardisasi sebagai kuasa pertumbuhan.',
     intro:
-      '74 produk standard: hidangan sedia dimakan, kuah stimbot, skewer, sup herba dan bebola Halal. Harga telus, beli sepaket atau sekotak penuh, penghantaran rantaian sejuk di Lembah Klang.',
+      `${PRODUCT_COUNT} produk standard: hidangan sedia dimakan, kuah stimbot, skewer, sup herba dan bebola Halal. Harga telus, beli sepaket atau sekotak penuh, penghantaran rantaian sejuk di Lembah Klang.`,
     ctaPrice: 'Lihat Senarai Harga Borong',
     ctaOrder: 'Pesanan Pantas 1 Minit',
     ctaWhatsapp: 'Hubungi WhatsApp',
     statsLabel: ['Produk', 'Kategori', 'Pesanan Min.', 'Rantaian Sejuk'],
-    statsValue: ['74', '14', '1 pkt', 'Lembah Klang'],
+    statsValue: [String(PRODUCT_COUNT), '14', '1 pkt', 'Lembah Klang'],
     howTitle: 'Pesan Dalam 3 Langkah',
     howSub: 'Tanpa pendaftaran. Lihat harga, masukkan kuantiti, sahkan di WhatsApp.',
     steps: [
-      { t: 'Buka senarai harga', d: '74 produk dengan harga sepaket dan harga sekotak penuh.' },
+      { t: 'Buka senarai harga', d: `${PRODUCT_COUNT} produk dengan harga sepaket dan harga sekotak penuh.` },
       { t: 'Masukkan kuantiti', d: 'Taip bilangan paket atau kotak — jumlah dan caj penghantaran dikira automatik.' },
       { t: 'Hantar di WhatsApp', d: 'Satu ketikan menghantar pesanan ke WhatsApp kami untuk pengesahan stok.' },
     ],
     catTitle: 'Kategori Borong',
     catSub: 'Ketik mana-mana kategori untuk membuka bahagian senarai harga itu.',
-    catAll: 'Lihat kesemua 74 produk',
+    catAll: `Lihat kesemua ${PRODUCT_COUNT} produk`,
     popTitle: 'Paling Laris',
     popSub: 'Produk yang paling kerap dipesan semula oleh restoran dan kafe.',
     popAdd: 'Tambah ke pesanan',
@@ -182,7 +182,7 @@ const COPY = {
     finalSub: 'Waktu pejabat Isnin–Jumaat 10:00 AM – 6:00 PM. WhatsApp dibuka sepanjang masa.',
     cartHint: (n: number) => `${n} item dalam senarai pesanan anda — teruskan`,
   },
-} as const;
+};
 
 const STEP_ICONS = [ListOrdered, ClipboardList, MessageCircle];
 const WHY_ICONS = [Sparkles, Clock, Snowflake, BadgeCheck];

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { PRODUCTS } from '../data/products';
 import { CartItem, Product } from '../types';
 
 const CART_STORAGE_KEY = 'oriental_food_cart';
@@ -6,7 +7,10 @@ const CART_STORAGE_KEY = 'oriental_food_cart';
 const readCart = (): CartItem[] => {
   try {
     const saved = localStorage.getItem(CART_STORAGE_KEY);
-    return saved ? JSON.parse(saved) : [];
+    const items: CartItem[] = saved ? JSON.parse(saved) : [];
+    // A saved cart holds a full copy of each product, so drop anything that
+    // has since been delisted rather than let it be ordered again.
+    return items.filter((i) => PRODUCTS.some((p) => p.id === i.product?.id));
   } catch {
     return [];
   }

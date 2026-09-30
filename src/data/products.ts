@@ -42,26 +42,6 @@ export const PRODUCTS: Product[] = [
     isPopular: true,
   },
   {
-    id: 2,
-    code: 'NO. 02',
-    nameZh: '炸鲜奶',
-    nameEn: 'Fried Milk',
-    categoryId: 'snacks_desserts',
-    categoryZh: '甜品/小吃',
-    categoryEn: 'Snacks & Desserts',
-    cert: 'HALAL',
-    pricing: {
-      unitLabel: '180g*pkt',
-      unitPrice: 8.6,
-      cartonLabel: '180g*30pkt*ctn',
-      cartonPrice: 258.0,
-      cartonRatio: 30,
-    },
-    image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80',
-    descriptionZh: '经典粤式甜品，金黄酥脆外皮包裹浓郁奶香，入口即化。',
-    descriptionEn: 'Classic Cantonese golden fried milk bites, crispy coating with smooth sweet milk core.',
-  },
-  {
     id: 3,
     code: 'NO. 03',
     nameZh: '脆皮鲜奶',
@@ -1545,3 +1525,6 @@ export const PRODUCTS: Product[] = [
     isPopular: true,
   },
 ];
+
+/** Number of products currently listed — used in the marketing copy. */
+export const PRODUCT_COUNT = PRODUCTS.length;

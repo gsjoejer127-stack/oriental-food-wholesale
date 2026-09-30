@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles, ShieldCheck, Truck, Clock, DollarSign, Repeat, ArrowDown } from 'lucide-react';
+import { PRODUCT_COUNT } from '../data/products';
 import { Language } from '../types';
 
 interface HeroBannerProps {
@@ -84,10 +85,10 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
 
           <p className="text-xs sm:text-sm text-stone-300 max-w-2xl mx-auto leading-relaxed mb-8">
             {lang === 'zh'
-              ? '深耕马来西亚餐饮市场，提供冷冻料理包、滋补靓汤、中式酱料、火锅汤底、串串与Halal清真丸子等 74 款高品质标准化食材。支持零售与整箱批发。'
+              ? `深耕马来西亚餐饮市场，提供冷冻料理包、滋补靓汤、中式酱料、火锅汤底、串串与Halal清真丸子等 ${PRODUCT_COUNT} 款高品质标准化食材。支持零售与整箱批发。`
               : lang === 'ms'
-              ? 'Menyediakan 74 penyelesaian makanan berkualiti termasuk hidangan sedia dimakan, sup herba, kuah stimbot, skewer & bebola Halal. Menyokong jualan runcit dan borong.'
-              : 'Providing 74 standardized F&B solutions covering frozen ready meals, nourishing soups, hotpot bases, skewers & Halal dim sum. Full carton wholesale and retail supported.'}
+              ? `Menyediakan ${PRODUCT_COUNT} penyelesaian makanan berkualiti termasuk hidangan sedia dimakan, sup herba, kuah stimbot, skewer & bebola Halal. Menyokong jualan runcit dan borong.`
+              : `Providing ${PRODUCT_COUNT} standardized F&B solutions covering frozen ready meals, nourishing soups, hotpot bases, skewers & Halal dim sum. Full carton wholesale and retail supported.`}
           </p>
 
           {/* CTA Buttons */}
@@ -96,7 +97,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
               onClick={onExploreCatalog}
               className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white font-bold px-6 py-3 rounded-full text-sm shadow-lg shadow-amber-900/30 transition-all active:scale-95"
             >
-              <span>{lang === 'zh' ? '立即挑选 74 款食材' : lang === 'ms' ? 'Pilih 74 Bahan Makanan' : 'Browse All 74 Products'}</span>
+              <span>{lang === 'zh' ? `立即挑选 ${PRODUCT_COUNT} 款食材` : lang === 'ms' ? `Pilih ${PRODUCT_COUNT} Bahan Makanan` : `Browse All ${PRODUCT_COUNT} Products`}</span>
               <ArrowDown className="w-4 h-4" />
             </button>
             <button

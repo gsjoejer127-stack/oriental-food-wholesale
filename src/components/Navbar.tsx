@@ -14,7 +14,7 @@ import {
   ChevronRight,
   History
 } from 'lucide-react';
-import { CATEGORIES } from '../data/products';
+import { CATEGORIES, PRODUCT_COUNT } from '../data/products';
 import { CartItem, Language } from '../types';
 import { PolicyLinks } from './PolicyLinks';
 import type { PolicyTab } from './DisclaimerModal';
@@ -157,7 +157,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative w-full">
               <input
                 type="text"
-                placeholder={lang === 'zh' ? '搜索 74 款批发食材 (如: 糍粑、肥牛、小龙虾...)' : 'Search 74 wholesale products (e.g. Rice cake, Beef, Lobster...)'}
+                placeholder={lang === 'zh' ? `搜索 ${PRODUCT_COUNT} 款批发食材 (如: 糍粑、肥牛、小龙虾...)` : `Search ${PRODUCT_COUNT} wholesale products (e.g. Rice cake, Beef, Lobster...)`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-stone-100 border border-stone-300 rounded-full py-2 pl-10 pr-10 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all shadow-inner"
@@ -234,7 +234,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="relative w-full">
             <input
               type="text"
-              placeholder={lang === 'zh' ? '搜索74款食材 (糍粑/肥牛/小龙虾...)' : 'Search products...'}
+              placeholder={lang === 'zh' ? `搜索 ${PRODUCT_COUNT} 款食材 (糍粑/肥牛/小龙虾...)` : 'Search products...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-stone-100 border border-stone-300 rounded-full py-1.5 pl-9 pr-8 text-xs text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
