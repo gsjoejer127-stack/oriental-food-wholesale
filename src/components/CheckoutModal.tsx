@@ -18,6 +18,7 @@ import { POLICY_LINKS } from './PolicyLinks';
 import type { PolicyTab } from './DisclaimerModal';
 import { CartItem, CheckoutFormData, DeliveryZone, Language, Order, PaymentMethod } from '../types';
 import { buildOrderWhatsAppLink } from '../utils/whatsapp';
+import { notifyOrder } from '../utils/orderNotify';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -109,6 +110,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       total: grandTotal,
       paymentStatus: 'pending',
     };
+
+    // Reliable path: tell the owner immediately by email/sheet, independent
+    // of WhatsApp - this is the one that can't be silently skipped.
+    notifyOrder(newOrder);
 
     // Open WhatsApp with the order pre-filled immediately, inside this click
     // handler, so the browser doesn't treat it as a blocked popup. The buyer
