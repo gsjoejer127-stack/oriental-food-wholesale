@@ -6,7 +6,7 @@ import { Order } from '../types';
 // order is never silently lost even if WhatsApp never opens or the customer
 // never taps Send.
 const ORDER_NOTIFY_URL =
-  'https://script.google.com/macros/s/AKfycbwK8uAEhVbcZAl4bkPunQJWnYTWTqIhqaBkvQBhXY2zupuQkJhL-mSy88BsDywfdFY/exec';
+  'https://script.google.com/macros/s/AKfycbw8csah4zmddhWYkTv231NjDOHXMabW8unvksM5FKy5g2vqPvrOYl2u0hV8pf6bWaM/exec';
 
 export const notifyOrder = (order: Order): void => {
   try {
