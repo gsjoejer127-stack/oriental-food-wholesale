@@ -17,6 +17,7 @@ import {
 import { POLICY_LINKS } from './PolicyLinks';
 import type { PolicyTab } from './DisclaimerModal';
 import { CartItem, CheckoutFormData, DeliveryZone, Language, Order, PaymentMethod } from '../types';
+import { buildOrderWhatsAppLink } from '../utils/whatsapp';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -96,20 +97,27 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   };
 
   const handleSimulatePayment = () => {
+    const orderId = `OS-${new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 8)}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newOrder: Order = {
+      id: orderId,
+      createdAt: new Date().toLocaleString(),
+      items: cartItems,
+      customer: formData,
+      subtotal,
+      deliveryFee,
+      discount: 0,
+      total: grandTotal,
+      paymentStatus: 'pending',
+    };
+
+    // Open WhatsApp with the order pre-filled immediately, inside this click
+    // handler, so the browser doesn't treat it as a blocked popup. The buyer
+    // still has to tap Send inside WhatsApp itself - no web page can do that
+    // last tap for them.
+    window.open(buildOrderWhatsAppLink(newOrder), '_blank', 'noopener,noreferrer');
+
     setStep('verifying');
     setTimeout(() => {
-      const orderId = `OS-${new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 8)}-${Math.floor(1000 + Math.random() * 9000)}`;
-      const newOrder: Order = {
-        id: orderId,
-        createdAt: new Date().toLocaleString(),
-        items: cartItems,
-        customer: formData,
-        subtotal,
-        deliveryFee,
-        discount: 0,
-        total: grandTotal,
-        paymentStatus: 'pending',
-      };
       onOrderComplete(newOrder);
     }, 1800);
   };

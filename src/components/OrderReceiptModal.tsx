@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckCircle2, Printer, MessageSquare, Download, ShoppingBag, MapPin, Phone, User, Calendar, ShieldCheck, RotateCcw } from 'lucide-react';
 import { Language, Order } from '../types';
+import { buildOrderWhatsAppLink } from '../utils/whatsapp';
 
 interface OrderReceiptModalProps {
   order: Order | null;
@@ -19,20 +20,6 @@ export const OrderReceiptModal: React.FC<OrderReceiptModalProps> = ({
 
   const handlePrint = () => {
     window.print();
-  };
-
-  // Generate WhatsApp message link pre-filled with order details
-  const generateWhatsAppLink = () => {
-    const itemsList = order.items
-      .map(
-        (i) =>
-          `• ${i.product.code} ${i.product.nameZh} (${i.packOption === 'carton' ? i.product.pricing.cartonLabel : i.product.pricing.unitLabel}) x${i.quantity} = RM ${(i.pricePerUnit * i.quantity).toFixed(2)}`
-      )
-      .join('%0A');
-
-    const text = `*东升食品 - 批发新订单订单号: ${order.id}*%0A%0A*客户资料:*%0A姓名: ${order.customer.fullName}%0A电话: ${order.customer.phone}%0A公司/餐厅: ${order.customer.companyName || '个人/无'}%0A配送地址: ${order.customer.address}, ${order.customer.city}%0A配送日期: ${order.customer.deliveryDate}%0A%0A*订购食材清单:*%0A${itemsList}%0A%0A*食材小计:* RM ${order.subtotal.toFixed(2)}%0A*冷链运费:* RM ${order.deliveryFee.toFixed(2)}%0A*订单总额:* RM ${order.total.toFixed(2)}%0A*支付状态:* ${order.paymentStatus === 'paid' ? '已完成支付' : '待确认付款 (尚未收款)'} - 拟用方式: ${order.customer.paymentMethod.toUpperCase()}`;
-
-    return `https://wa.me/60108822608?text=${text}`;
   };
 
   return (
@@ -170,13 +157,13 @@ export const OrderReceiptModal: React.FC<OrderReceiptModalProps> = ({
           )}
 
           <a
-            href={generateWhatsAppLink()}
+            href={buildOrderWhatsAppLink(order)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 sm:flex-none py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition-all"
           >
             <MessageSquare className="w-4 h-4" />
-            <span>{lang === 'zh' ? '发送订单至 WhatsApp 客服' : lang === 'ms' ? 'Hantar ke WhatsApp' : 'Send to WhatsApp'}</span>
+            <span>{lang === 'zh' ? '没弹出？点此重新发送至 WhatsApp' : lang === 'ms' ? 'Tiada respons? Hantar semula ke WhatsApp' : "Didn't open? Resend to WhatsApp"}</span>
           </a>
 
           <button
