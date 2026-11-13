@@ -462,9 +462,9 @@ export const PRODUCTS: Product[] = [
     cert: 'HALAL',
     pricing: {
       unitLabel: '400g*20pcs*pkt',
-      unitPrice: 31.0,
+      unitPrice: 32.0,
       cartonLabel: '400g*20pkt*ctn',
-      cartonPrice: 620.0,
+      cartonPrice: 640.0,
       cartonRatio: 20,
     },
     image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&auto=format&fit=crop&q=80',
@@ -546,9 +546,9 @@ export const PRODUCTS: Product[] = [
     isSpicy: true,
     pricing: {
       unitLabel: '400g*20pcs*pkt',
-      unitPrice: 33.0,
+      unitPrice: 35.0,
       cartonLabel: '400g*20pkt*ctn',
-      cartonPrice: 660.0,
+      cartonPrice: 700.0,
       cartonRatio: 20,
     },
     image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80',
